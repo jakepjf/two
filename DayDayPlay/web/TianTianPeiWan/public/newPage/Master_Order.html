@@ -1,0 +1,2068 @@
+<!DOCTYPE html><!--订单信息-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../util/jquery-3.4.0.js"></script>
+    <script src="../util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <!--时间-->
+    <script src="../js/gettime.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+            color: #666666;
+        }
+        body{
+            background: #f3f3f3;
+            height: 100%;
+        }
+        #order_box{
+            /*background: #f3f3f3;*/
+            width: 1186px;
+            background: #f3f3f3;
+            /*height: 100%;*/
+            overflow: hidden;
+        }
+        #order-content{
+            padding: 30px 80px 30px 80px;
+            margin-top: 30px;
+            margin-right: 30px;
+            margin-bottom: 30px;
+            background-color: #fff;
+            border: #f3f3f3;
+            min-width: 1020px;
+            /*height: 100%;*/
+            margin-left: 40px;
+            border-radius: 7px;
+            overflow: hidden;
+        }
+        /*<!--订单头部信息-->*/
+        #orderTop{
+            width: 951px;
+            overflow: hidden;
+            background: #fff;
+            /*padding-bottom: 20px;*/
+        }
+        /*<!--陪玩订单或者我的订单-->*/
+        .order-title,.order-screen{
+            width: 950px;
+            /*height: 54px;*/
+        }
+        .order-title a{
+            color: #172c45;
+            text-decoration: none;
+            width: 80px;
+            height: 49px;
+            display: inline-block;
+        }
+        .order-title span{
+            width: 1px;
+            display: inline-block;
+            height: 19px;
+            background: #172c45;
+            margin:20px 5px 10px 0;
+        }
+        .order-title h3{
+            float: left;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .order-title h3.active{
+            color: #F5511E;
+        }
+        /*查询*/
+        .order-screen{
+            width: 950px;
+            height: 29px;
+            margin: 0 auto;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .s{
+            float: left;
+        }
+        .s input{
+            border-radius:8px;
+            height: 26px;
+            outline: none;
+            border: 1px solid #fbca99;
+        }
+        /*筛选*/
+        .litnav{
+            float: right;
+        }
+        .litnav a{
+            float: left;
+            width: 96px;
+            height: 26px;
+            box-sizing: border-box;
+            border: solid 1px #fbca99;
+            border-radius: 3px;
+            margin-left: 10px;
+            line-height: 24px;
+            text-align: center;
+            color: #172c45;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .litnav a.active{
+            border-left: solid 5px #ffa040;
+        }
+        /*内容*/
+        .order-con-head{
+            width: 950px;
+            height: 45px;
+            margin: 0 auto;
+            position: relative;
+            margin-top: 10px;
+        }
+        /*两条线*/
+        .line1{
+            top: 0;
+            display: block;
+            position: absolute;
+            left: 0;
+            max-width: 100%;
+            border: 0;
+            vertical-align: middle;
+        }
+        .line2{
+            bottom: 0;
+            display: block;
+            position: absolute;
+            left: 0;
+            max-width: 100%;
+        }
+        /*头部ul*/
+        .info{
+            width: 100%;
+            height: 43px;
+            position: absolute;
+            left: 0;
+            top: 1px;
+        }
+        /*表头*/
+        .info li{
+            float: left;
+            text-align: center;
+            color: #666666;
+            font-weight: bold;
+            margin-top: 15px;
+            line-height: 14px;
+            border-right: solid 1px #ffdcb9;
+        }
+        .li1{
+            width: 260px;
+        }
+        .li2{
+            width: 160px;
+        }
+        .li3{
+            width: 84px;
+        }
+        .li4,.li6{
+            width: 130px;
+        }
+        .li5{
+            width: 145px;
+        }
+        /*暂时没有数据表示*/
+        .emptyshow{
+            padding-top: 150px;
+            padding-bottom: 150px;
+            display: none;
+        }
+        .empty img{
+            margin: 0 auto;
+            max-width: 100%;
+            margin-left: 400px;
+            border: 0;
+            vertical-align: middle;
+        }
+        .empty p{
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            word-wrap: break-word;
+        }
+        /*订单*/
+            /*未支付订单头部*/
+        .order-son-data{
+            width: 910px;
+           border: 1px solid #fbca99;
+            border-radius: 8px;
+            float: left;
+            margin: 10px 20px 0 18px;
+        }
+        .order-data-tou{
+            background: orange;
+            width: 100%;
+            height: 35px;
+            line-height: 35px;
+            opacity: 0.8;
+            border-radius: 8px 8px 0 0 ;
+        }
+        .dataname{
+            width: 100px;
+            height: 20px;
+            margin: 0 0 0 15px;
+            color: white;
+            opacity: 0.9;
+            /*border-right: 1px solid #172c45;*/
+        }
+        .data-name{
+            width: 100px;
+            height: 20px;
+            /*margin: 0 0 0 15px;*/
+            color: white;
+            opacity: 0.9;
+        }
+        .line3{
+            width: 1px;
+            height: 14px;
+            background: #172c45;
+            display: inline-block;
+            margin:2px 5px 0 5px ;
+        }
+        .call-play,.callplay-id{
+            color: white;
+            opacity: 0.9;
+            text-decoration: none;
+        }
+        .order-data-date{
+            float: right;
+            color: white;
+            opacity: 0.9;
+            margin-right: 20px;
+        }
+            /*未支付订单内容*/
+        .order-data-zjFt{
+
+        }
+        /*ul*/
+        .order-zj-data{
+            width: 100%;
+            height: 100px;
+            border-bottom: 1px solid #f3f3f3;
+        }
+        .order-zj-data .hg{
+            float: left;
+            text-align: center;
+            color: #666666;
+            /*color: #172c45;*/
+            font-weight: bold;
+            height: 100px;
+            line-height: 96px;
+        }
+        .order-data-li1,.order-data-li6,.oWzf{
+            float: left;
+            text-align: center;
+            color: #666666;
+            font-weight: bold;
+            height: 100px;
+            /*line-height: 96px;*/
+        }
+        .oWzf{
+            padding-top:30px;
+        }
+        .order-data-li1 .order-user-loge{
+            width: 50px;
+            height: 50px;
+        }
+        /*头像*/
+        .logeLi1{
+            float: left;
+            height: 100px;
+            line-height: 100px;
+            margin-left: 20px;
+        }
+        /*玩家信息*/
+        .order-user-con{
+            float: left;
+            width: 150px;
+            height: 100px;
+            text-align: left;
+        }
+        .order-username{
+            margin:32px 0 3px 20px;
+            height: 20px;
+            width: 150px;
+            text-decoration: none;
+            text-align: left;
+            color: #666666;
+            display: inline-block;
+        }
+       .order-usergrade{
+            margin-left: 20px;
+            text-align: left;
+        }
+        .order-user-name:hover,.order-username:hover{
+            color: orange;
+        }
+        /*操作*/
+        .order-data-li5,.order-data-li6{
+            margin: -7px 0 0 0;
+        }
+        .divli6{
+            float: left;
+            width: 150px;
+            height: 100px;
+        }
+        /*.payli6{*/
+            /*display: none;*/
+        /*}*/
+        .payli6,.qxli6,.see_stateli6,.finishli6,.assessli6,.Seeassessli6,.fixassessli6{
+           cursor: pointer;
+            width: 149px;
+           float: left;
+            text-align: center;
+            height: 20px;
+            margin: 5px 0 5px 0;
+            color: #666666;
+
+        }
+        .payli6:hover,.qxli6:hover,.see_stateli6:hover,.finishli6:hover,.assessli6:hover,.Seeassessli6:hover,.fixassessli6:hover{
+            color: orange;
+        }
+        .QUXIAO{
+            height: 100px;
+            line-height: 96px;
+        }
+        .order-xj{
+            margin-top:20px ;
+        }
+        /*进度*/
+        .order-speed{
+            float: left;
+            margin-left: 10px;
+        }
+        /*进度表示*/
+        .order-speedSee{
+            float: left;
+            margin-left: 100px;
+        }
+            /*进度头*/
+        .order-speedTou{
+           margin: 8px;
+            width: 666px;
+            height: 25px;
+        }
+        .order-speedTou li{
+            float: left;
+            width: 80px;
+            text-align: center;
+            margin:0 30px 0 0;
+        }
+        .see_stateli6.active,.close_stateli6.active01
+        {
+            color: orange;
+        }
+            /*中间*/
+        .order-speedCon{
+            float: left;
+            margin: 8px;
+            height: 30px;
+            width: 666px;
+        }
+        .speedCon-pLi0{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: gray;
+            float: left;
+            margin: 0 0 0 25px ;
+        }
+            /*圆圈*/
+        .ring{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: gray;
+            float: left;
+        }
+            /*进度条*/
+        .slip{
+            width:80px;
+            height: 10px;
+            background: gainsboro;
+            float: left;
+            margin:10px 0 ;
+        }
+        .speedCon-lineLi0,.speedCon-pLi0{
+            background: orange;
+        }
+            /*时间*/
+        .order-speedFt{
+            float: left;
+            margin: 8px;
+            width: 666px;
+            height: 40px;
+        }
+        .order-speedFt li{
+            float: left;
+            width: 95px;
+           margin-right:20px;
+        }
+        .showHide{
+            display: none;
+        }
+        .close_stateli6{
+            cursor: pointer;
+            display: none;
+        }
+        /*评价弹框*/
+        #morder-tbBox{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .morder-moban{
+            width: 100%;
+            height: 100%;
+            background:grey;
+            opacity: 0.9;
+        }
+        .morder-tk{
+            width: 300px;
+            height: 300px;
+            background: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -150px;
+            margin-left: -150px;
+            border-radius:12px;
+        }
+        .morder-nr{
+            width: 300px;
+            height: 220px;
+            /*line-height: 120px;*/
+            text-align: center;
+            font-size: 18px;
+            color: black;
+            opacity: 1;
+
+        }
+        .morder-wdpj{
+            height: 30px;
+            line-height: 30px;
+            margin: 30px 0 20px 0;
+            /*background: red;*/
+        }
+        .morder-nr .morder-fupf{
+           margin-top: 5px;
+            float: left;
+            margin-left: 15px;
+        }
+        .morder-zfs{
+            margin-top: 5px;
+            float: right;
+            border: 1px solid orange;
+            margin-right: 15px;
+        }
+        .morder-xpj{
+            width: 270px;
+            height: 80px;
+            margin: 15px 0 ;
+        }
+        .morder-jg{
+            width: 300px;
+            height: 70px;
+            /*background:#f3f3f3 ;*/
+            background: gainsboro;
+
+        }
+        .morder-qd,.morder-cal{
+            width: 90px;
+            height: 28px;
+            font-size:18px ;
+            color: black;
+            margin: 20px  15px 20px 35px;
+        }
+        .morder-qd:hover,.morder-cal:hover{
+            border: 1px solid #007DDB;
+            background: #bce8f1;
+        }
+        .morder-qd.active,.morder.active{
+            border: 2px solid #007DDB;
+        }
+    </style>
+    <!--倒计时代码引用-->
+    <script type="text/javascript" src="../js/countdown.js"></script>
+</head>
+<body>
+    <div id="order_box">
+        <div id="order-content">
+              <!--订单头部信息-->
+            <div id="orderTop" class="top">
+                <!--陪玩订单或者我的订单-->
+                <div class="order-title">
+                    <a href="play_Order.html"><h3 class="paly_order">陪玩订单</h3></a>
+                    <span></span>
+                    <a href="#"><h3 class="me_order active">我的订单</h3></a>
+                </div>
+                <!--查询筛选-->
+                <div class="order-screen">
+                    <!--筛选-->
+                    <div class="litnav">
+                        <!--全部陪玩订单-->
+                        <a href="javascript:;" class="order-all active">
+                            <img  src="https://yundown.daofengdj.com/static/user/img/order/ico_09.jpg" alt="">
+                            <span>全部</span>
+                        </a>
+                        <!--未支付订单-->
+                        <a href="javascript:;" class="order-noPag">
+                            <img src="https://yundown.daofengdj.com/static/user/img/order/ico_11.jpg" alt="">
+                            <span>待支付</span>
+                        </a>
+                        <!--进行中陪玩订单-->
+                        <a href="javascript:;" class="order-doing">
+                            <img src="https://yundown.daofengdj.com/static/user/img/order/ico_11.jpg" alt="">
+                            <span>进行中</span>
+                        </a>
+                        <!--已完成陪玩订单-->
+                        <a href="javascript:;" class="order-finsh">
+                            <img src="https://yundown.daofengdj.com/static/user/img/order/ico_12.jpg" alt="">
+                            <span>已完成</span>
+                        </a>
+                    </div>
+                </div>
+                <!--订单内容表头-->
+                <div class="order-con-head">
+                    <img style="width: 100%" class="line1" src="https://yundown.daofengdj.com/static/user/img/order/img_05.jpg" alt="">
+                    <ul class="info">
+                        <li class="li1"><span>订单信息</span></li>
+                        <li class="li2"><span>单价</span></li>
+                        <li class="li3"><span>数量</span></li>
+                        <li class="li4"><span>金额</span></li>
+                        <li class="li5"><span>订单状态</span></li>
+                        <li class="li6"><span>操作</span></li>
+                    </ul>
+                    <img style="width: 100%" class="line2" src="https://yundown.daofengdj.com/static/user/img/order/img_05.jpg" alt="">
+                </div>
+
+            </div>
+            <ul class="order">
+
+            </ul>
+            <!--分页-->
+            <!--<div></div>-->
+            <!--暂时没有数据时-->
+            <div msg="emptyshow" class="empty emptyshow" >
+                <img src="https://yundown.daofengdj.com/static/public/img/none.png" alt="">
+                <p>暂时没有数据</p>
+            </div>
+        </div>
+    </div>
+    <!--评价的弹框-->
+    <div id="morder-tbBox" class="clearfix">
+        <div class="morder-moban">
+            <div class="morder-tk">
+                <div class="morder-nr">
+                    <h3 class="morder-wdpj" ><strong>我的评价</strong></h3>
+                    <p class="morder-fupf">服务评分
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                    </p>
+                    <p class="morder-zfs"><span class="morder-hzfs">xx</span>分</p>
+                    <textarea class="morder-xpj"></textarea>
+                </div>
+                <div class="morder-jg">
+                    <button class="morder-qd active">确定</button>
+                    <button class="morder-cal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 临时存的代码uid
+    localStorage.setItem('myID','111116');
+    // var U_id=localStorage.myID;
+    // 待支付
+    function _orderpay(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}.</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                                <li class="order-data-li5 oWzf" style=" width: 145px;">
+                                    <span class="spanli5">待支付</span>
+                                   <p class="orderjsox">
+                                       <img width="16px" height="16px" src="https://yundown.daofengdj.com/static/public/img/ico_06.png" alt="">
+                                       <span class="odjs ordersj" ></span>
+                                   </p>
+                                </li>
+                                <li class="order-data-li6 " style="width: 130px;">
+                                    <div class="divli6">
+                                        <span class="payli6">继续支付</sapn>
+                                        <span class="qxli6">取消订单</span>
+                                        <span class="see_stateli6">查看进度</span>
+                                        <span class="close_stateli6">关闭进度</span>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="showHide">
+                                <span class="order-speed">.订单进度</span>
+
+                                <div class="order-speedSee">
+
+                                    <ul class="order-speedTou">
+                                        <li class="speedTou-li0">提交订单</li>
+                                        <li class="speedTou-li1">支付完成</li>
+                                        <li class="speedTou-li2">陪玩接单</li>
+                                        <li class="speedTou-li3">订单进行中</li>
+                                        <li class="speedTou-li4">订单完成</li>
+                                        <li class="speedTou-li5">已评价</li>
+                                    </ul>
+
+                                    <ul class="order-speedCon">
+                                        <li class="speedCon-li0">
+                                            <p class="speedCon-pLi0 "></p>
+                                            <p class="speedCon-lineLi0 slip"></p>
+                                        </li>
+                                        <li class="speedCon-li1">
+                                            <p class="speedCon-pLi1 ring"></p>
+                                            <p class="speedCon-lineLi1 slip"></p>
+                                        </li>
+                                        <li class="speedCon-li2">
+                                            <p class="speedCon-pLi2 ring"></p>
+                                            <p class="speedCon-lineLi2 slip"></p>
+                                        </li>
+                                        <li class="speedCon-li3">
+                                            <p class="speedCon-pLi3 ring"></p>
+                                            <p class="speedCon-lineLi3 slip"></p>
+                                        </li>
+                                        <li class="speedCon-li4">
+                                            <p class="speedCon-pLi4 ring"></p>
+                                            <p class="speedCon-lineLi4 slip"></p>
+                                        </li>
+                                        <li class="speedCon-li5">
+                                            <p class="speedCon-pLi5 ring"></p>
+
+                                        </li>
+                                    </ul>
+
+                                    <ul class="order-speedFt">
+                                        <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                </li>`);
+    }
+    // 待接单
+    function _orderpaly(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 hg" style=" width: 145px;"><span class="spanli5">待接单</span></li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+
+                                    <span class="qxli6 order-xj">取消订单</span>
+                                    <span class="see_stateli6">查看进度</span>
+                                    <span class="close_stateli6">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1" >
+                                        <p class="speedCon-pLi1 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi1 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring " ></p>
+                                        <p class="speedCon-lineLi2 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring"></p>
+                                        <p class="speedCon-lineLi3 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring"></p>
+                                        <p class="speedCon-lineLi4 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                    <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 进行中
+    function _orderdoing(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 hg" style=" width: 145px;"><span class="spanli5">进行中</span></li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+                                    <a href="#" class="finishli6 order-xj">完成订单</a>
+
+                                    <span class="see_stateli6">查看进度</span>
+                                    <span class="close_stateli6">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0"></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi1 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi2 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi3 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring"></p>
+                                        <p class="speedCon-lineLi4 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                    <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+                                    <li class="speedFt-li2">${aaaa.XDjddate}</li>
+                                    <li class="speedFt-li3">${aaaa.XDjxdate}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 评价
+    function _orderendplay(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 hg" style=" width: 145px;"><span class="spanli5">评价</span></li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+                                    <a href="#" class="assessli6 order-xj">点击评价</a>
+                                    <span class="see_stateli6">查看进度</span>
+                                    <span class="close_stateli6">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi1 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi2 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi3 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi4 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                     <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+                                    <li class="speedFt-li2">${aaaa.XDjddate}</li>
+                                    <li class="speedFt-li3">${aaaa.XDjxdate}</li>
+                                    <li class="speedFt-li4">${aaaa.XDwcdate}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 完成评价
+    function _orderfinish(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 hg" style=" width: 145px;"><span class="spanli5">已评价</span></li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+                                    <a href="#" class="Seeassessli6">查看评价</a>
+                                    <span class="fixassessli6">修改评价</span>
+                                    <span class="see_stateli6">查看进度</span>
+                                    <span class="close_stateli6">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi1 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi2 slip" style="background: orange"> </p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi3 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li4" >
+                                        <p class="speedCon-pLi4 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi4 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring" style="background: orange"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                     <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+                                    <li class="speedFt-li2">${aaaa.XDjddate}</li>
+                                    <li class="speedFt-li3">${aaaa.XDjxdate}</li>
+                                    <li class="speedFt-li4">${aaaa.XDwcdate}</li>
+                                    <li class="speedFt-li5">${aaaa.XDpldate}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 支付超时，订单自动取消
+    function _orderouttimepay(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 oWzf" style=" width: 145px;">
+                                <span class="spanli5">已取消</span>
+                                <p class="paycsli5">支付超时</p>
+                            </li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+
+                                    <span class="see_stateli6 QUXIAO">查看进度</span>
+                                    <span class="close_stateli6 QUXIAO">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring"></p>
+                                        <p class="speedCon-lineLi1 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" ></p>
+                                        <p class="speedCon-lineLi2 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring"></p>
+                                        <p class="speedCon-lineLi3 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring"></p>
+                                        <p class="speedCon-lineLi4 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                    <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 支付时，客户自己取消订单
+    function _ordercalpay(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 oWzf" style=" width: 145px;">
+                                <span class="spanli5">已取消</span>
+                                <p class="paycsli5">已取消支付</p>
+                            </li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+
+                                    <span class="see_stateli6 QUXIAO">查看进度</span>
+                                    <span class="close_stateli6 QUXIAO">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring"></p>
+                                        <p class="speedCon-lineLi1 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" ></p>
+                                        <p class="speedCon-lineLi2 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring"></p>
+                                        <p class="speedCon-lineLi3 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring"></p>
+                                        <p class="speedCon-lineLi4 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                     <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 陪玩接单超时，系统自动取消
+    function _orderouttimeplay(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 oWzf" style=" width: 145px;">
+                                <span class="spanli5">已取消</span>
+                                <p class="paycsli5">接单超时</p>
+                            </li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+
+                                    <span class="see_stateli6 QUXIAO">查看进度</span>
+                                    <span class="close_stateli6 QUXIAO">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi1 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" ></p>
+                                        <p class="speedCon-lineLi2 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring"></p>
+                                        <p class="speedCon-lineLi3 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring"></p>
+                                        <p class="speedCon-lineLi4 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                    <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+                                    <li class="speedFt-li2">${aaaa.XDjddate}</li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 还在接单的时候，客户自己取消订单
+    function _ordercalplay(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 oWzf" style=" width: 145px;">
+                                <span class="spanli5">已取消</span>
+                                <p class="paycsli5">已取消接单</p>
+                            </li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+
+                                    <span class="see_stateli6 QUXIAO">查看进度</span>
+                                    <span class="close_stateli6 QUXIAO">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi1 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" ></p>
+                                        <p class="speedCon-lineLi2 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring"></p>
+                                        <p class="speedCon-lineLi3 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring"></p>
+                                        <p class="speedCon-lineLi4 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                     <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+                                    <li class="speedFt-li2">${aaaa.XDjddate}</li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`)
+    }
+    // 陪玩拒绝此客户的订单
+    function _orderbusy(aaaa){
+        $('.order').append(` <li class="order-son-data">
+
+
+                        <div class="order-data-tou">
+                            <span class="dataname">订单编号:</span><span class="data-name">${aaaa.JD}</span>
+                            <span class="line3"> </span>
+                            <a href="#"><span class="callplay-id">联系陪玩:${aaaa.PFname}--></span><span class="call-play">${aaaa.Puid}</span></a>
+                            <p class="order-data-date">${aaaa.XDdate}</p>
+                        </div>
+
+                        <div class="order-data-zjFt">
+                            <ul class="order-zj-data">
+                                <li class="order-data-li1" style="width: 250px;">
+                                    <div class="logeLi1">
+                                        <a href="#">
+                                            <img src="${aaaa.Pphoto}" alt="头像" title="昵称" class="order-user-loge  img-circle">
+                                        </a>
+                                    </div>
+                                    <div class="order-user-con">
+                                        <a href="#" title="用户昵称" class="order-username">昵称:<span class="order-user-name">${aaaa.PFname}</span></a>
+                                        <span class="order-usergrade">服务类型:<span class="order-user-grade">${aaaa.PGname}</span></span>
+                                    </div>
+                                </li>
+                                <li class="order-data-li2 hg" style=" width: 157px;"><span class="spanli2">${aaaa.Pprice}/局</span></li>
+                                <li class="order-data-li3 hg" style="width: 82px;"><span class="spanli3">${aaaa.XDsum}</span></li>
+                                <li class="order-data-li4 hg" style="width: 130px;">
+                                    <span class="spanli4">${aaaa.XDmoney}</span>
+                                </li>
+                            <li class="order-data-li5 oWzf" style=" width: 145px;">
+                                <span class="spanli5">已取消</span>
+                                <p class="paycsli5">对方忙</p>
+                            </li>
+                            <li class="order-data-li6 " style="width: 130px;">
+                                <div class="divli6">
+
+                                    <span class="see_stateli6 QUXIAO">查看进度</span>
+                                    <span class="close_stateli6 QUXIAO">关闭进度</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="showHide">
+                            <span class="order-speed">.订单进度</span>
+
+                            <div class="order-speedSee">
+
+                                <ul class="order-speedTou">
+                                    <li class="speedTou-li0">提交订单</li>
+                                    <li class="speedTou-li1">支付完成</li>
+                                    <li class="speedTou-li2">陪玩接单</li>
+                                    <li class="speedTou-li3">订单进行中</li>
+                                    <li class="speedTou-li4">订单完成</li>
+                                    <li class="speedTou-li5">已评价</li>
+                                </ul>
+
+                                <ul class="order-speedCon">
+                                    <li class="speedCon-li0">
+                                        <p class="speedCon-pLi0 "></p>
+                                        <p class="speedCon-lineLi0 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li1">
+                                        <p class="speedCon-pLi1 ring" style="background: orange"></p>
+                                        <p class="speedCon-lineLi1 slip" style="background: orange"></p>
+                                    </li>
+                                    <li class="speedCon-li2">
+                                        <p class="speedCon-pLi2 ring" ></p>
+                                        <p class="speedCon-lineLi2 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li3">
+                                        <p class="speedCon-pLi3 ring"></p>
+                                        <p class="speedCon-lineLi3 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li4">
+                                        <p class="speedCon-pLi4 ring"></p>
+                                        <p class="speedCon-lineLi4 slip"></p>
+                                    </li>
+                                    <li class="speedCon-li5">
+                                        <p class="speedCon-pLi5 ring"></p>
+
+                                    </li>
+                                </ul>
+
+                                <ul class="order-speedFt">
+                                     <li class="speedFt-li0">${aaaa.XDdate}</li>
+                                    <li class="speedFt-li1">${aaaa.XDzfdate}</li>
+                                    <li class="speedFt-li2">${aaaa.XDjddate}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>`);
+    }
+    // 封装全部加载的ajax
+    function alldata(){
+        $.ajax({
+            url:'/getxmorder',
+            type:'post',
+            data:{
+                U_id:parseInt(localStorage.myID),
+            },
+            success:function (res) {
+                if(res.error){
+                    alert(res.Master_Order);
+                    $('.order').html('');
+                    $('.empty').css({'display':'block'});
+                }else{
+                    $('.order').html('');
+                    $('.empty').css({'display':'none'});
+                    for(var i=0;i<res.data.length;i++){
+                        // /待支付
+                        switch (res.data[i].XDstate){
+                            case '待支付':
+                                _orderpay(res.data[i]);
+                                break;
+                            case '待接单':
+                                _orderpaly(res.data[i]);
+                                break;
+                            case '进行中':
+                                _orderdoing(res.data[i]);
+                                break;
+                            case '评价':
+                                _orderendplay(res.data[i]);
+                                break;
+                            case '已评价':
+                                _orderfinish(res.data[i]);
+                                break;
+                            case '支付超时':
+                                _orderouttimepay(res.data[i]);
+                                break;
+                            case '已取消支付':
+                                _ordercalpay(res.data[i]);
+                                break;
+                            case '接单超时':
+                                _orderouttimeplay(res.data[i]);
+                                break;
+                            case '已取消接单':
+                                _ordercalplay(res.data[i]);
+                                break;
+                            case '对方忙':
+                                _orderbusy(res.data[i]);
+                                break;
+
+                        }
+                    }
+                }
+            }
+        });
+    }
+    alldata();
+    // 页面加载的时候
+    // $(document).ready(function(){
+    // 全部
+    $('.order-all').click(function () {
+        $('.litnav a').removeClass('active');
+        $('.order-all').addClass('active');
+        alldata();
+    });
+    // });
+
+    // 待付款
+    $('.order-noPag').click(function () {
+        $('.litnav a').removeClass('active');
+        $('.order-noPag').addClass('active');
+        $.ajax({
+            url:'/dzforder',
+            type:'post',
+            data:{
+                U_id:parseInt(localStorage.myID),
+                XDstate:'待支付'
+            },
+            success:function (res) {
+                if(res.error){
+                    alert(res.Master_Order);
+                    $('.order').html('');
+                    $('.empty').css({'display':'block'});
+                }else{
+                    $('.order').html('');
+                    $('.empty').css({'display':'none'});
+                    for(var i=0;i<res.data.length;i++){
+                        // /待支付
+                        _orderpay(res.data[i]);
+                    }
+                }
+            }
+        });
+    });
+    // 进行中；
+    $('.order-doing').click(function () {
+        $('.litnav a').removeClass('active');
+        $('.order-doing').addClass('active');
+        $.ajax({
+            url:'/jxzorder',
+            type:'post',
+            data:{
+                U_id:parseInt(localStorage.myID),
+                XDstate:'进行中'
+            },
+            success:function (res) {
+                if(res.error){
+                    alert(res.Master_Order);
+                    $('.order').html('');
+                    $('.empty').css({'display':'block'});
+                }else{
+                    $('.order').html('');
+                    $('.empty').css({'display':'none'});
+                    for(var i=0;i<res.data.length;i++){
+                        // /待支付
+                        _orderdoing(res.data[i]);
+                    }
+                }
+            }
+        });
+    });
+    // 已完成
+    $('.order-finsh').click(function () {
+        $('.litnav a').removeClass('active');
+        $('.order-finsh').addClass('active');
+        $.ajax({
+            url:'/ywcorder',
+            type:'post',
+            data:{
+                U_id:parseInt(localStorage.myID),
+                XDstate1:'评价',
+                XDstate2:'已评价'
+            },
+            success:function (res) {
+                if(res.error){
+                    alert(res.Master_Order);
+                    $('.order').html('');
+                    $('.empty').css({'display':'block'});
+                }else{
+                    $('.order').html('');
+                    $('.empty').css({'display':'none'});
+                    for(var i=0;i<res.data.length;i++){
+                        // /待支付
+                        switch (res.data[i].XDstate){
+                            case '评价':
+                                _orderendplay(res.data[i]);
+                                break;
+                            case '已评价':
+                                _orderfinish(res.data[i]);
+                                break;
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    // 当待支付的时间到00：00时候，就自动取消订单
+
+    var totaltime =86400, tout;
+    //  var totaltime =10, tout;
+    var timer = function (totaltime)
+    {
+        var reg = /^\d$/;
+        var h = Math.floor (totaltime / 60 / 60);
+        h = reg.test (h) ? "0" + h : h;
+        var m = Math.floor (totaltime / 60 % 60);
+        m = reg.test (m) ? "0" + m : m;
+        var s = Math.floor (totaltime % 60);
+        s = reg.test (s) ? "0" + s : s;
+        var str = h + ":" + m + ":" + s;
+        $ (".odjs").text (str);
+        // if($('.ordersj').text() == "00:00:00"){
+        //
+        //     return
+        // }
+        if (str == "00:00:00") {
+            clearTimeout (tout);
+            $('.order-son-data').removeClass('ocszforder');
+            alert(55);
+            $('.ordersj').parents(".order-son-data").addClass('ocszforder');
+            var oxxxx1=$('.ocszforder .data-name').text().split('.');
+            var oDataname=oxxxx1.splice(0,oxxxx1.length-1);
+            console.log(oDataname);
+            var oGettime;
+
+            var XDstate='支付超时';
+            oGettime=clock();
+            for(var jj=0;jj<oDataname.length;jj++){
+                $.ajax({
+                    url:'/cszforder',
+                    type:'post',
+                    data:{
+                        U_id:parseInt(localStorage.myID),
+                        JD_co:oDataname[jj],
+                        XDstate:XDstate,
+                        XDzfdate:oGettime
+                    },
+                    success:function (res) {
+                        if (res.error) {
+                            alert('页面内容加载失败');
+                        }
+                        else {
+                            $('.empty').css({'display':'none'});
+                            alert('修改成功');
+                            alldata();
+                        }
+                    }
+                })
+            }
+
+            return;
+        }
+        tout = setTimeout (function () {
+            timer (--totaltime);
+        }, 1000);
+    };
+    jQuery (function ($)
+    {
+        timer (totaltime);
+    });
+
+
+    // 打开进度
+    $('.order').on('click','.see_stateli6',function () {
+        // var oSeejd=$(this).parents(".order-son-data").index();
+        $('.order li').removeClass('oSeejd');
+        // 给当前点击的li加上oSeejd的属性
+        $(this).parents(".order-son-data").addClass('oSeejd');
+        // 打开进度
+        $('.oSeejd .showHide').css({'display':'block'});
+        $('.oSeejd .see_stateli6').css({'display':'none'});
+        $('.oSeejd .close_stateli6').css({'display':'block'})
+    });
+    // 关闭进度
+    $('.order').on('click','.close_stateli6',function () {
+        $('.order li').removeClass('oClosejd');
+        $(this).parents(".order-son-data").addClass('oClosejd');
+        // $(this).parents(".order-son-data").removeClass('oClosejd');
+        $('.oClosejd .showHide').css({'display':'none'});
+        $('.oClosejd .see_stateli6').css({'display':'block'});
+        $('.oClosejd .close_stateli6').css({'display':'none'})
+    });
+    // 取消订单
+    $('.order').on('click','.qxli6',function () {
+        $('.order-son-data').removeClass('oquxiaojd');
+        $(this).parents(".order-son-data").addClass('oquxiaojd');
+        // 获取订单号
+        var oDataname=$('.oquxiaojd .data-name').text();
+        console.log(oDataname);
+        var oJD_puon=$('.oquxiaojd .spanli5').text();
+        console.log(oJD_puon);
+        var oGettime;
+        if(oJD_puon=='待支付'){
+            var JD_puon='已取消支付';
+            if(confirm('您确定要取消吗')) {
+                oGettime=clock();
+                $.ajax({
+                    url: '/yqxzforder',
+                    type: 'post',
+                    data: {
+                        U_id:parseInt(localStorage.myID),
+                        JD_co:oDataname,
+                        XDstate: JD_puon,
+                        XDzfdate:oGettime
+                    },
+                    success: function (res) {
+                        if (res.error) {
+                            alert(res.Master_Order);
+                        } else {
+                            $('.empty').css({'display':'none'});
+                            alert(res.Master_Order);
+                            alldata();
+                        }
+                    }
+                });
+            }
+        }
+        if(oJD_puon=='待接单'){
+            var JD_puon='已取消接单';
+            if(confirm('您确定要取消吗')) {
+                oGettime=clock();
+                $.ajax({
+                    url: '/yqxjdorder',
+                    type: 'post',
+                    data: {
+                        U_id:parseInt(localStorage.myID),
+                        JD_co:oDataname,
+                        XDstate:JD_puon,
+                        XDjddate:oGettime
+
+                    },
+                    success: function (res) {
+                        if (res.error) {
+                            alert(res.Master_Order);
+                        } else {
+                            $('.empty').css({'display':'none'});
+                            alert(res.Master_Order);
+                            alldata();
+                        }
+                    }
+                });
+                alert('mei')
+            }
+        }
+    });
+    //  $("#aaa").attr("disabled", "true");//禁用按钮
+    // $("#aaa").removeAttr("disabled");//启用按钮
+    // 订单完成
+    $('.order').on('click','.finishli6',function () {
+        $('.order-son-data').removeClass('oyjsorder');
+        $(this).parents(".order-son-data").addClass('oyjsorder');
+        alert($(this).parents(".order-son-data").index());
+        var oDataname=$('.oyjsorder .data-name').text();
+        var oGettime;
+        if(confirm('您确定要取消吗')) {
+            var JD_puon='评价';
+            oGettime=clock();
+            $.ajax({
+                url:'/wcorder',
+                type:'post',
+                data:{
+                    U_id:parseInt(localStorage.myID),
+                    JD_co:oDataname,
+                    XDstate:JD_puon,
+                    XDwcdata:oGettime
+                },
+                success:function (res) {
+                    if (res.error) {
+                        alert(res.Master_Order);
+                    } else {
+                        $('.empty').css({'display': 'none'});
+                        alert(res.data);
+                        alldata();
+                    }
+                }
+            })
+        }
+    });
+    // 评论assessli6
+    $('.order').on('click','.assessli6',function () {
+        $('.order li').removeClass('odpj');
+        $(this).parents(".order-son-data").addClass('odpj');
+        $('#morder-tbBox').css({'display':'block'});
+        // 给弹框里之前的内容清空
+        $('.morder-hzfs').text('');
+        $('.morder-xpj').val('');
+        $('.star').css({'color':'#666666'});
+        // 解除禁用确定按钮
+        $('.morder-qd').removeAttr('disabled');
+    });
+    // 点击星星
+    $('.star').click(function () {
+        $('.morder-hzfs').text('');
+        $('.star').css({'color':'#666666'});
+        $('.star').removeClass('starspan');
+        var oStarsum=$(this).index();
+        for(var i=0;i<=oStarsum;i++){
+            $('.star').eq(i).css({'color':'yellow'});
+            $('.star').eq(i).addClass('starspan');
+        }
+        var sum=oStarsum+1;
+        $('.morder-hzfs').text(sum);
+        alert(15);
+    });
+    // 点击修改评论
+    $('.order').on('click','.fixassessli6',function () {
+        $('.order li').removeClass('odpj');
+        $(this).parents(".order-son-data").addClass('odpj');
+        $('#morder-tbBox').css({'display':'block'});
+        // 给弹框里之前的内容清空
+        // $('.morder-hzfs').text('');
+        // $('.morder-xpj').val('');
+        // $('.star').css({'color':'#666666'});
+        // 解除禁用确定按钮
+        $('.morder-qd').removeAttr('disabled');
+    });
+    // 继续支付
+    $('.order').on('click','.payli6',function () {
+        alert(1);
+        $('.order li').removeClass('xmpay11');
+        $(this).parents(".order-son-data").addClass('xmpay11');
+        var oxxxx1=$('.xmpay11 .data-name').text().split('.');
+        var oDataname=oxxxx1.splice(0,oxxxx1.length-1);
+        localStorage.setItem('xmpayddnum',oDataname);
+        location.href='http://localhost:5000/page/xmjxorder.html'
+        // localStorage.
+    });
+
+    // 点击确定评论
+    $('.morder-qd').click(function () {
+        $('.morder-cal').removeClass('active');
+        var oDataname=$('.odpj .data-name').text();
+        // 状态用来判断时评论还是修改评论
+        var oZTA=$('.odpj .spanli5').text();
+        var oCon=$('.morder-xpj').val();
+        console.log( oCon)
+        if($('.morder-hzfs').text()==''){
+            var oStarnum=5;
+        }
+        else{
+            var oStarnum=$(".morder-fupf span.starspan").length;
+        }
+        $('#morder-tbBox').css({'display':'none'});
+        // 获取时间
+        var oGettime=clock();
+        // 判断时评论的时候
+        if(oZTA=='评价'){
+            alert(11);
+            var JD_puon='已评价';
+            $.ajax({
+                url:'/pjforder',
+                type:'post',
+                data:{
+                    // 订单
+                    JD_co:oDataname,
+                    EV_jdco:oDataname,
+                    // 内容
+                    EV_sec:oCon,
+                    // 星星数
+                    EV_sorce:oStarnum,
+                    U_id:parseInt(localStorage.myID),
+                    XDstate:JD_puon,
+                    XDpldate:oGettime
+                },
+                success:function (res) {
+                    if(res.error){
+                        alert('增加评价失败');
+                    }else{
+                        alert(res.Master_Order);
+                        alldata();
+                    }
+                }
+
+            });
+        }
+        // 判断为修改
+        if(oZTA=='已评价'){
+            $.ajax({
+                url:'/xgpjorder',
+                type:'post',
+                data:{
+                    EV_jdco:oDataname,
+                    EV_sec:oCon,
+                    //U_id:5,
+                    // JD_puon:JD_puon,
+                    EV_pldate:oGettime,
+                    EV_sorce:oStarnum
+                },
+                success:function (res) {
+                    if(res.error){
+                        alert('增加失败');
+                    }else{
+                        alert('增加成功');
+                    }
+                }
+            });
+        }
+    });
+    // 取消评论
+    $('.morder-cal').click(function () {
+        $('.morder-qd').removeClass('active');
+        $('.morder-cal').addClass('active');
+        $('#morder-tbBox').css({'display':'none'});
+    });
+    // 点击查看评论
+    $('.order').on('click','.Seeassessli6',function () {
+        $('.morder-hzfs').text('');
+        $('.morder-xpj').val('');
+        $('.star').css({'color':'#666666'});
+        // 给其他li清除ospj
+        $('.order li').removeClass('ospj');
+        // 给单签点击的那个li加ospj属性
+        $(this).parents(".order-son-data").addClass('ospj');
+
+        // 获取单签订单号
+        var oDataname=$('.ospj .data-name').text();
+
+        $.ajax({
+            url:'/splorder',
+            type:'post',
+            data:{
+                EV_jdco:oDataname
+            },
+            success:function (res) {
+                if(res.error){
+                    alert(res.Master_Order);
+                    // $('#morder-tbBox').css({'display':'none'});
+                }
+                else{
+                    // 弹框显示
+                    $('#morder-tbBox').css({'display':'block'});
+                    // 分数
+                    $('.morder-hzfs').text(res.data[0].PJsorce);
+                    // 评论内容
+                    $('.morder-xpj').val(res.data[0].PJnr);
+                    // 星星加色彩
+                    for(var i=0;i<res.data[0].PJsorce;i++){
+                        $('.star').eq(i).css({'color':'yellow'});
+                    }
+                    $('.morder-qd').attr({'disabled':'true'});
+                }
+            }
+        })
+    });
+
+
+
+
+
+
+
+    // 查看进度和关闭进度
+    //  for(let item of [...document.querySelectorAll('.order-son-data')]){
+    //     item.addEventListener('click',function(event){
+    //         if(event.target.className.indexOf('see_stateli6') != -1){
+    //             this.querySelector(".see_stateli6").style.display = 'none';
+    //             this.querySelector(".close_stateli6").style.display = 'block';
+    //             this.querySelector(".showHide").style.display = 'block';
+    //         }
+    //     });
+    //     item.addEventListener('click',function(event){
+    //       if(event.target.className.indexOf('close_stateli6') != -1){
+    //           this.querySelector(".see_stateli6").style.display = 'block';
+    //           this.querySelector(".close_stateli6").style.display = 'none';
+    //           this.querySelector(".showHide").style.display = 'none';
+    //       }
+    //
+    //   })
+    // }
+</script>
+</html>

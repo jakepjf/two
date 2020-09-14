@@ -1,0 +1,121 @@
+<!DOCTYPE html><!--申请成为陪玩-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/cropper.min.css">
+    <link rel="stylesheet" href="../css/ImgCropping.css">
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/cropper.min.js"></script>
+    <link rel="stylesheet" href="../css/xmMaster_Edition.css">
+    <script src="../js/xmMaster_Editionjs.js"></script>
+    <link rel="stylesheet" href="../css/tutor.css">
+
+
+</head>
+<body>
+<script src="./../js/xmMaster_Edition.js"></script>
+<script src="./../js/xmMaster_Editionleft.js"></script>
+<div id="tutor_box">
+    <div id="tutor">
+        <h3>申请陪玩</h3>
+        <ul>
+
+            <li id="li_pic"><div  id="tutor_pic">
+
+                <img id="finalImg" src="" width="100%">
+            </div>
+                <div id="tutor_pic_btn">
+                    <button id="replaceImg" class="l-btn">更换</button>
+                    <div>支持jpg、gif、png、或bmp格式的图片，文件必须小于3M</div></div>
+            </li>
+            <li>基本资料 <span class="FIn">标题标*为必填项，请务必填写真实资料</span></li>
+            <li>
+                <span class="FIn">*</span><span class="OP">昵称</span><input type="text" class="border"  id="jb-neckname">
+            </li>
+            <li>
+                <span class="FIn">*</span><span class="OP">性别</span><input type="radio" name="sex" checked="checked" >男&nbsp; &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" >女
+            </li>
+            <li>
+                <span class="FIn">*</span><span class="OP">身份证姓名</span><input type="text" class="border"  id="IDname">
+            </li>
+            <li>
+                <span class="FIn">*</span><span class="OP">身份证号</span><input type="text" class="border"  id="IDnum">
+            </li>
+            <li>
+                <span class="FIn">*</span><span class="OP">手机</span><input type="text" class="border"  id="phone">
+            </li>
+            <li>
+                <span class="FIn">*</span><span class="OP">QQ</span><input type="text" class="border"  placeholder="重要联系方式" id="QQ">
+            </li>
+            <li id="li_pic2"><span class="FIn">*</span><span class="OP">app封面照</span><div id="tutor_pic2" > <img class="pic" id="pic2"><input class="upload" name="file" type="file" style="display: none"/><span>请点击图片上传您的主页封面照，建议大小为：750*1334</span>
+            </div></li>
+            <li id="tutor-games">
+                <span class="FIn">*</span> <span class="OP-games">请选择申请的游戏</span>
+                <select id="tutor-test" class="border" >
+                   <!-- <option value="0">英雄联盟</option>
+                    <option value="1">绝地求生</option>
+                    <option value="2">和平精英</option>
+                    <option value="3">王者荣耀</option>-->
+                </select>
+            </li>
+            <li id="tutor-levels">
+                <span class="FIn">*</span> <span class="OP-games">请选择自己的段位</span>
+                <select id="tutor-level" class="border" >
+                    <option value="0">业余</option>
+                    <option value="1">黄金</option>
+                    <option value="2">铂金</option>
+                    <option value="3">钻石</option>
+                    <option value="4">大师</option>
+                    <option value="5">王者</option>
+                </select>
+            </li>
+            <li>
+                <span class="FIn">*</span><span class="OP">价格</span><input type="text" class="border"  id="price">
+            </li>
+            <li id="tutor-person">
+                <span class="FIn">*</span><span class="OP">自我介绍</span><textarea name="" id="person-con" cols="70" rows="6"></textarea>
+            </li>
+            <li id="li_pic3"><span class="FIn">*</span><span class="OP">游戏封面照</span><div id="tutor_pic3"><img class="pic" id="pic3"><input class="upload" name="file" type="file" style="display: none"/><span>请点击图片上传您游戏截图(游戏个人界面)</span></div></li>
+        </ul>
+        <button id="tutor_btn">提交</button>
+    </div>
+</div>
+
+
+
+<!--图片裁剪框 start-->
+<div style="display: none" class="tailoring-container">
+    <div class="black-cloth" onclick="closeTailor(this)"></div>
+    <div class="tailoring-content">
+        <div class="tailoring-content-one">
+            <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
+                选择图片
+            </label>
+            <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
+        </div>
+        <div class="tailoring-content-two">
+            <div class="tailoring-box-parcel">
+                <img id="tailoringImg">
+            </div>
+            <div class="preview-box-parcel">
+                <p>图片预览：</p>
+                <div class="square previewImg"></div>
+                <div class="circular previewImg"></div>
+            </div>
+        </div>
+        <div class="tailoring-content-three">
+            <button class="l-btn cropper-reset-btn">复位</button>
+            <button class="l-btn cropper-rotate-btn">旋转</button>
+            <button class="l-btn cropper-scaleX-btn">换向</button>
+            <button class="l-btn sureCut" id="sureCut">确定</button>
+        </div>
+    </div>
+</div>
+<!--图片裁剪框 end-->
+
+
+</body>
+<script src="../js/tutor.js"></script>
+</html>

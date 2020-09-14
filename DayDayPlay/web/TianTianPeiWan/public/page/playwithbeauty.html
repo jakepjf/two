@@ -1,0 +1,318 @@
+<!DOCTYPE html><!--陪玩中心-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="../css/lfty-ypw.css">
+    <script src="../util/jquery-3.4.0.js"></script>
+    <link rel="stylesheet" href="../util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+
+</head>
+<body>
+<div class="section">
+    <!--头部-->
+    <div class="head-nav">
+        <div class="index-head">
+            <!--logo部分-->
+            <div class="index-logo">
+                <a href="index.html">
+                    <img src="./../image/index-img/yuewanlogo.png" alt="">
+                </a>
+            </div>
+            <!--导航内容部分-->
+            <div class="header-navigation">
+                <a href="index.html" class="navigation-1 ar">首页</a>
+                <a href="playwithbeauty.html" class="navigation-1 ar">约陪玩</a>
+                <a href="9.9.html" class="navigation-1 ar">9.9专区</a>
+                <a href="recharge.html" class="navigation-1 ar">充值</a>
+                <div class="header-navigation-ip">
+                    <input type="text" placeholder="搜索昵称、uid、靓号">
+                    <img src="./../image/index-img/search.png" alt="" class="search">
+                </div>
+            </div>
+            <div class="header-navigation">
+                <a class="ar" href="">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    登录&nbsp;&nbsp;|&nbsp;&nbsp;注册</a>
+            </div>
+            <div class="header-navigation" >
+                <a href="" class="ar">
+                    <img src="./../image/index-img/message.png" alt="">
+                    信息中心
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--面包屑-->
+    <div class="crumbs-nav">
+        <div class="nav-list">
+            <a href="" title="天天陪玩">首页</a>
+            <img src="" alt=""><img src="../images/the-third-pic/the-third-game/ico_03.png" height="7" width="4"/>
+            <h1 class="active">英雄联盟陪玩</h1>
+        </div>
+    </div>
+    <!--筛选栏-->
+    <div class="list-nav">
+        <div class="info">
+            <!--游戏类型-->
+            <div class="info-box">
+                <div class="left-tit">
+                    <p class="nav-list-font">游戏类型</p>
+                </div>
+                <div class="right-box right-box11  flex-item">
+                    <ul class="game">
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box level">
+                <div class="left-tit">
+                    <p class="nav-list-font">选择等级</p>
+                </div>
+                <div class="right-box style3">
+                    <!--lol等级-->
+                    <ul class="style2 on">
+                        <li class="active">
+                            <p class="p1 ">不限</p>
+                        </li>
+                        <li >
+                            <p class="p1">黄金</p>
+                        </li>
+                        <li>
+                            <p class="p1">铂金</p>
+                        </li>
+                        <li>
+                            <p class="p1">钻石</p>
+                        </li>
+                        <li>
+                            <p class="p1">大师</p>
+                        </li>
+                        <li>
+                            <p class="p1">王者</p>
+                        </li>
+                    </ul>
+                    <!--PUBG等级-->
+                    <ul class="style2 " >
+                        <li class="active">
+                            <p class="p1 ">不限</p>
+                        </li>
+                        <li >
+                            <p class="p1">萌新</p>
+                        </li>
+                        <li>
+                            <p class="p1">中级</p>
+                        </li>
+                        <li>
+                            <p class="p1">高级</p>
+                        </li>
+                    </ul>
+                    <!--hpjy等级-->
+                    <ul class="style2 " >
+                        <li class="active">
+                            <p class="p1 ">不限</p>
+                        </li>
+                        <li >
+                            <p class="p1">萌新</p>
+                        </li>
+                        <li>
+                            <p class="p1">中级</p>
+                        </li>
+                        <li>
+                            <p class="p1">高级</p>
+                        </li>
+                    </ul>
+                    <!--王者荣耀等级-->
+                    <ul class="style2 " >
+                        <li class="active">
+                            <p class="p1 ">不限</p>
+                        </li>
+                        <li >
+                            <p class="p1">黄金</p>
+                        </li>
+                        <li>
+                            <p class="p1">铂金</p>
+                        </li>
+                        <li>
+                            <p class="p1">钻石</p>
+                        </li>
+                        <li>
+                            <p class="p1">星耀</p>
+                        </li>
+                        <li>
+                            <p class="p1">荣耀王者</p>
+                        </li>
+                    </ul>
+                    <!--语音聊天等级-->
+                    <ul class="style2 " >
+                        <li class="active">
+                            <p class="p1 ">不限</p>
+                        </li>
+                        <li >
+                            <p class="p1">业余</p>
+                        </li>
+                        <li>
+                            <p class="p1">专业</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="sort-box">
+            <div class="sort-info" id="screening">
+                <!--综合排序-->
+                <div class="all active-1 box oth_btn " >
+                    综合排序
+                </div>
+
+                <!--价格排序-->
+                <div class="single box oth_btn active2 active1" id="price">
+                    <span>价格</span>
+                    <p>
+                        <i class="i1"></i>
+                        <i class="i2"></i>
+                    </p>
+                </div>
+                <!--评价排序-->
+                <div class="all box oth_btn active">
+                    评价
+                </div>
+
+                <!--新人-->
+                <div class="all box oth_btn active">
+                    新人
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--内容展示-->
+    <div class="main">
+        <div>
+            <article>
+                <div class="list-box">
+                    <div class="photo-content">
+
+
+                    </div>
+                </div>
+            </article>
+            <!--周榜-->
+            <aside>
+                <div class="info2">
+                    <div class="tit-box">
+                        <div class="txt1">
+                            <span>人气</span>
+                            <i></i>
+                            周榜
+                        </div>
+                    </div>
+
+                    <div class="wrap">
+                        <div class="list-box1 list-box2">
+                            <!--单个主播推荐-->
+                            <!--<div class="list style1">
+                                <a href="" class="pic-box">
+                                    <img src="" alt="" class="pic-3">
+                                    <img src="" alt="" class="mask">
+                                </a>
+                                <div class="txt">
+                                    <div class="one-txt-cut">
+                                        会撩人的电竞女友
+                                    </div>
+                                    <p>
+                                        时长:
+                                        <span>581</span>
+                                    </p>
+                                </div>
+                            </div>-->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="info2">
+                    <div class="tit-box">
+                        <div class="txt1">
+                            <span>魅力</span>
+                            <i></i>
+                            周榜
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        <div class="list-box1 list-box3">
+                            <!--单个主播推荐-->
+
+
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    </div>
+    <!--尾部-->
+    <div class="index-bottom">
+        <div class="index-bottom-box">
+            <a href="javascript:;">
+                <img class="fl" src="./../image/index-img/consume1.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img class="fl"  src="./../image/index-img/consume2.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img class="fl"  src="./../image/index-img/consume3.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img class="fl"  src="./../image/index-img/consume4.jpg" alt="">
+            </a>
+            <div class="clearfix"></div>
+            <div class="bottom-box-information">
+                <div class="bottom-box-tel fl">
+                    <i class="bottom-box-telimg"></i>
+                    客服电话
+                    <span class="bottom-box-tn">010-68608228</span>
+                    <span class="bottom-box-t">咨询时间：7X24小时</span>
+                </div>
+                <div class="bottom-box-qq fl">
+                    <i class="bottom-box-qqimg"></i>
+                    客服QQ：
+                    <span class="bottom-box-qqnum">800184580</span>
+                </div>
+                <div class="bottom-box-detailed fl">
+                    <span class="bottom-box-detailedtime">咨询时间：7X24小时</span>
+                </div>
+                <div class="bottom-box-but fl">
+                    <a class="fl help" href="javascript:;">帮助中心</a>
+                    <a class="fl help" href="javascript:;">服务保障</a>
+                    <a class="fl help" href="javascript:;">关于我们</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="bottom-box-copy">
+                京ICP备18042855号 Copyright 2014-2020 TaoLe Corporation,All Rights Reserved
+                <br>
+                北京陶乐科技有限公司，专业陪练为玩家提供各种热门游戏陪练陪玩服务，年轻人喜爱的游戏陪玩平台
+                <br>
+                地址：北京市石景山区鲁谷路74号中国瑞达大厦6层M601室
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/lfty-js.js"></script>
+<script>
+
+
+
+</script>
+</html>

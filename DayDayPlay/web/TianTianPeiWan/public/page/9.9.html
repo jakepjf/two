@@ -1,0 +1,281 @@
+<!DOCTYPE html><!--9.9专区-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../util/layui-v2.4.5/layui/css/layui.css">
+    <script src="../util/layui-v2.4.5/layui/layui.js"></script>
+    <script src="../util/jquery-3.4.0.js"></script>
+    <link rel="stylesheet" href="../css/specialarea.css">
+    <link rel="stylesheet" href="./../util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/head.css">
+</head>
+<body>
+        <div class="index-head">
+                <!--logo部分-->
+                <div class="index-logo">
+                    <a href="index.html">
+                        <img src="./../image/index-img/yuewanlogo.png" alt="">
+                    </a>
+                </div>
+                <!--导航内容部分-->
+                <div class="header-navigation">
+                    <a href="index.html" class="navigation-1 ar">首页</a>
+                    <a href="playwithbeauty.html" class="navigation-1 ar">约陪玩</a>
+                    <a href="9.9.html" class="navigation-1 ar">9.9专区</a>
+                    <a href="recharge.html" class="navigation-1 ar">充值</a>
+                    <div class="header-navigation-ip">
+                        <input type="text" placeholder="搜索昵称、uid、靓号">
+                        <img src="./../image/index-img/search.png" alt="" class="search">
+                    </div>
+                </div>
+                <div class="header-navigation">
+                    <a class="ar" href="login.html">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        登录&nbsp;&nbsp;|&nbsp;&nbsp;注册</a>
+                </div>
+                <div class="header-navigation">
+                    <a href="Master_Edition.html" class="ar">
+                        <img src="./../image/index-img/message.png" alt="">
+                        信息中心
+                    </a>
+                </div>
+            </div>
+    <div>
+        <div class="layui-carousel" id="test1">
+            <div carousel-item id="specialarea-carousel">
+                    <div><img src="../image/tr/6.jpg" alt="" width="1366px" height="300px"></div>
+                    <div><img src="../image/tr/5.jpg" alt="" width="1366px" height="300px"></div>
+                    <div><img src="../image/tr/7.jpg" alt="" width="1366px" height="300px"></div>
+                    <div><img src="../image/tr/8.jpg" alt="" width="1366px" height="300px"></div>
+            </div>
+        </div>
+        <div id="specialarea-carousel-tab">
+            <img src="../image/tr/b1.png" alt="" id="specialarea-carousel-tab1">
+            <img src="../image/tr/lol_logo.png" alt="" id="specialarea-carousel-tab2">
+            <img src="../image/tr/b2.png" alt="" id="specialarea-carousel-tab3">
+            <img src="../image/tr/pubg_logo1.png" alt="" id="specialarea-carousel-tab4">
+        </div>
+        <div id="specialarea-body-lol">
+            <a href="">
+                <div class="specialarea-body-show">
+                    <div class="specialarea-body-show-navgation">
+                        <img src="../image/tr/10.jpg" alt="" class="specialarea-body-show-navgation-img">
+                        <div class="specialarea-body-show-body">
+                            <div class="div1"><img src="../image/tr/woman.png" alt="" class="specialarea-body-show-body-img1">&nbsp22</div>
+                            <div class="div2">大师</div>
+                        </div>
+                    </div>
+                    <div class="specialarea-body-show-foot">杀戮c</div>
+                    <div class="specialarea-body-show-foot1">
+                        <img src="../image/tr/zy.png" alt="">
+                        <span class="specialarea-body-show-foot1-span1">在线</span>|
+                        <span class="specialarea-body-show-foot1-span2">成都市</span>
+                        <span class="specialarea-body-show-foot1-span3">￥</span>
+                        <span class="specialarea-body-show-foot1-span4">9.9/</span>
+                        <span class="specialarea-body-show-foot1-span5">局</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div id="specialarea-body-cj">
+            <a href="">
+                <div class="specialarea-body-show">
+                    <div class="specialarea-body-show-navgation">
+                        <img src="../image/tr/4.jpg" alt="" class="specialarea-body-show-navgation-img">
+                        <div class="specialarea-body-show-body">
+                            <div class="div1"><img src="../image/tr/woman.png" alt="" class="specialarea-body-show-body-img1">&nbsp22</div>
+                            <div class="div2">大师</div>
+                        </div>
+                    </div>
+                    <div class="specialarea-body-show-foot">杀戮c</div>
+                    <div class="specialarea-body-show-foot1">
+                        <img src="../image/tr/zy.png" alt="">
+                        <span class="specialarea-body-show-foot1-span1">在线</span>|
+                        <span class="specialarea-body-show-foot1-span2">成都市</span>
+                        <span class="specialarea-body-show-foot1-span3">￥</span>
+                        <span class="specialarea-body-show-foot1-span4">9.9/</span>
+                        <span class="specialarea-body-show-foot1-span5">局</span>
+                    </div>
+                </div>
+            </a>
+        </div> 
+    </div>           
+</body>
+<script>
+        layui.use('carousel', function(){
+          var carousel = layui.carousel;
+          //建造实例
+          carousel.render({
+            elem: '#test1'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'hover' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+          });
+        });
+        let oLol=$('#specialarea-body-lol');
+        let oCj=$('#specialarea-body-cj');
+        function show(data){
+            oLol.append(`
+                <a href="">
+                    <div class="specialarea-body-show" data-id="${data.U_id}">
+                        <div class="specialarea-body-show-navgation">
+                            <img src="${data.U_photo}" alt="" class="specialarea-body-show-navgation-img">
+                            <div class="specialarea-body-show-body">
+                                <div class="div1"><img src="../image/tr/woman.png" alt="" class="specialarea-body-show-body-img1">&nbsp${data.U_age}</div>
+                                <div class="div2">大师</div>
+                            </div>
+                        </div>
+                        <div class="specialarea-body-show-foot">${data.U_falsename}</div>
+                        <div class="specialarea-body-show-foot1">
+                            <img src="../image/tr/zy.png" alt="">
+                            <span class="specialarea-body-show-foot1-span1">在线</span>|
+                            <span class="specialarea-body-show-foot1-span2">${data.U_address}</span>
+                            <span class="specialarea-body-show-foot1-span3">￥</span>
+                            <span class="specialarea-body-show-foot1-span4">9.9/</span>
+                            <span class="specialarea-body-show-foot1-span5">时</span>
+                        </div>
+                    </div>
+                </a>
+            `)
+        };//<img src="../image/tr/woman.png" alt="" class="specialarea-body-show-body-img1">
+        function show1(data){
+            oLol.append(`
+                <a href="">
+                    <div class="specialarea-body-show" data-id="${data.U_id}">
+                        <div class="specialarea-body-show-navgation">
+                            <img src="${data.U_photo}" alt="" class="specialarea-body-show-navgation-img">
+                            <div class="specialarea-body-show-body">
+                                <div class="div1" style="background: pink"><img src="../image/tr/man.png" alt="" class="specialarea-body-show-body-img1">&nbsp${data.U_age}</div>
+                                <div class="div2">大师</div>
+                            </div>
+                        </div>
+                        <div class="specialarea-body-show-foot">${data.U_falsename}</div>
+                        <div class="specialarea-body-show-foot1">
+                            <img src="../image/tr/zy.png" alt="">
+                            <span class="specialarea-body-show-foot1-span1">在线</span>|
+                            <span class="specialarea-body-show-foot1-span2">${data.U_address}</span>
+                            <span class="specialarea-body-show-foot1-span3">￥</span>
+                            <span class="specialarea-body-show-foot1-span4">9.9/</span>
+                            <span class="specialarea-body-show-foot1-span5">时</span>
+                        </div>
+                    </div>
+                </a>
+            `)
+        };//<img src="../image/tr/woman.png" alt="" class="specialarea-body-show-body-img1">
+        function show2(data){
+            oCj.append(`
+                <a href="">
+                    <div class="specialarea-body-show" data-id="${data.U_id}">
+                        <div class="specialarea-body-show-navgation">
+                            <img src="${data.U_photo}" alt="" class="specialarea-body-show-navgation-img">
+                            <div class="specialarea-body-show-body">
+                                <div class="div1"  style="background: pink"><img src="../image/tr/man.png" alt="" class="specialarea-body-show-body-img1">&nbsp${data.U_age}</div>
+                                <div class="div2">大师</div>
+                            </div>
+                        </div>
+                        <div class="specialarea-body-show-foot">${data.U_falsename}</div>
+                        <div class="specialarea-body-show-foot1">
+                            <img src="../image/tr/zy.png" alt="">
+                            <span class="specialarea-body-show-foot1-span1">在线</span>|
+                            <span class="specialarea-body-show-foot1-span2">${data.U_address}</span>
+                            <span class="specialarea-body-show-foot1-span3">￥</span>
+                            <span class="specialarea-body-show-foot1-span4">9.9/</span>
+                            <span class="specialarea-body-show-foot1-span5">时</span>
+                        </div>
+                    </div>
+                </a>
+            `)
+        };
+        function show3(data){
+            oCj.append(`
+                <a href="">
+                    <div class="specialarea-body-show" data-id="${data.U_id}">
+                        <div class="specialarea-body-show-navgation">
+                            <img src="${data.U_photo}" alt="" class="specialarea-body-show-navgation-img">
+                            <div class="specialarea-body-show-body">
+                                <div class="div1" ><img src="../image/tr/woman.png" alt="" class="specialarea-body-show-body-img1">&nbsp${data.U_age}</div>
+                                <div class="div2">大师</div>
+                            </div>
+                        </div>
+                        <div class="specialarea-body-show-foot">${data.U_falsename}</div>
+                        <div class="specialarea-body-show-foot1">
+                            <img src="../image/tr/zy.png" alt="">
+                            <span class="specialarea-body-show-foot1-span1">在线</span>|
+                            <span class="specialarea-body-show-foot1-span2">${data.U_address}</span>
+                            <span class="specialarea-body-show-foot1-span3">￥</span>
+                            <span class="specialarea-body-show-foot1-span4">9.9/</span>
+                            <span class="specialarea-body-show-foot1-span5">时</span>
+                        </div>
+                    </div>
+                </a>
+            `)
+        };
+        $(document).ready(function(){
+            $.ajax({
+                url:'/9.9Lol',
+                type:'get',
+                data:{
+                    cid:1,
+                    price:9.90
+                },
+                success:function(res){
+                    res.error?console.log('数据库错误'):(function(){
+                        $.each(res,function(i,v){
+                            if(res[i].U_sex=='女'){
+                                show1(v)
+                            }else{
+                                show(v)
+                            }
+                        })
+                    }())
+                }
+            })
+        });
+        let iNow=false;
+        $('#specialarea-carousel-tab4').click(function(){
+            $(this).css({'display':'none'});
+            $('#specialarea-carousel-tab3').css({'display':'block'});
+            $('#specialarea-carousel-tab1').css({'display':'none'});
+            $('#specialarea-carousel-tab2').css({'display':'block'});
+            $('#specialarea-body-cj').css({'display':'block'});
+            $('#specialarea-body-lol').css({'display':'none'});
+            if(iNow==false){
+                $.ajax({
+                url:'/9.9Cj',
+                type:'get',
+                data:{
+                    cid:2,
+                    price:9.90
+                },
+                success:function(res){
+                    res.error?console.log('数据库错误'):(function(){
+                        $.each(res,function(i,v){
+                            if(res[i].U_sex=='女'){
+                                show2(v)
+                            }else{
+                                show3(v)
+                            }
+                            
+                        })//.text().split('22')
+                        
+                    }())
+                } 
+            })
+
+            }
+            iNow=true;
+        });
+        
+        $('#specialarea-carousel-tab2').click(function(){
+            $(this).css({'display':'none'});
+            $('#specialarea-carousel-tab1').css({'display':'block'});
+            $('#specialarea-carousel-tab3').css({'display':'none'});
+            $('#specialarea-carousel-tab4').css({'display':'block'});
+            $('#specialarea-body-cj').css({'display':'none'});
+            $('#specialarea-body-lol').css({'display':'block'});
+        });
+</script>
+</html>
